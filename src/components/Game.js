@@ -74,6 +74,7 @@ function Game() {
 
   const jumpToHistory = (step) => {
     setStep(step);
+    setWinArray([]);
     setXIsNext(step % 2 === 0);
   };
 
