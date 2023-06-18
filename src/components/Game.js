@@ -10,6 +10,7 @@ function Game() {
       squares: Array(9).fill(null),
     },
   ]);
+  const [winArray, setWinArray] = useState([]);
   const [step, setStep] = useState(0);
 
   //Declaring a Winner
@@ -38,6 +39,7 @@ function Game() {
         squares[a] === squares[b] &&
         squares[a] === squares[c]
       ) {
+        setWinArray([a, b, c]);
         return squares[a];
       }
     }
@@ -66,6 +68,7 @@ function Game() {
         squares: Array(9).fill(null),
       },
     ]);
+    setWinArray([]);
     setXIsNext(true);
   };
 
@@ -79,7 +82,11 @@ function Game() {
       <h2 className="result">Winner is: {winner ? winner : "N/N"}</h2>
       <span className="player">Next player is: {xIsNext ? "X" : "O"}</span>
       <div className="game">
-        <Board squares={history[step].squares} handleClick={handleClick} />
+        <Board
+          winarray={winArray}
+          squares={history[step].squares}
+          handleClick={handleClick}
+        />
         <History history={history} jumpToHistory={jumpToHistory} />
       </div>
       <button onClick={handleRestart} className="restart-btn">
